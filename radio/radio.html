@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Radio Streaming</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/0.8.2/hls.js" integrity="sha512-B1uKsViQzk6Kbs6uv1gxfcItxlqURiEkvDfxNrInIdg+J6joKaJGoVKK3uBFMPCPpQWYSeiDaE5cgkbSft4YzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/0.8.2/hls.min.js" integrity="sha512-fbWzdxTo0lUMAYoXxsCPKbcqsczxzkUrbQbEO8nxVF02EOOhEaRyvAnoqQ8HWdzpVNNnCgYRvilErMF7Y/4lVw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <h1>Web Radio Streaming</h1>
+    <img src="https://media2.giphy.com/media/ER9ew0BbQGCDC/giphy.gif" alt="radio">
+
+    <audio id="radioPlayer" controls>
+        <source src="" type="audio/mpeg">
+        Browser Anda tidak mendukung pemutaran audio.
+    </audio>
+
+    <ul class="active">
+        <li><a href="javascript:void(0);" onclick="playRadio('https://stream2.andikafm.com:1057/andikafm');" id="radio1" >Radio Andika</a></li>
+        <li><a href="javascript:void(0);" onclick="playRadio('http://202.147.199.98/stream.nsv');">Global Radio</a></li>
+        <li><a href="javascript:void(0);" onclick="playRadio('http://202.147.199.101:8000/stream.nsv');">Sindo Trijaya FM</a></li>
+        <li><a href="javascript:void(0);" onclick="playRadio('http://u.klikhost.com:8000/suara_mahakam');">Suara Mahakam Samarinda</a></li>
+        <li><a href="javascript:void(0);" onclick="hls('https://wz.mari.co.id:1936/web_mustangfm/mustangfm/playlist.m3u8');">Mustang 88.0 FM</a></li>
+        <li><a href="javascript:void(0);" onclick="playRadio('https://stream-node0.rri.co.id/streaming/14/9014/kbrn.mp3');">RRI - Pusat Pemberitaan</a></li>
+        <li><a href="javascript:void(0);" onclick="playRadio('https://stream-node0.rri.co.id/streaming/18\/9018/rrisurabayapro1.mp3');">RRI - Surabaya 1</a></li>
+        <li><a href="javascript:void(0);" onclick="playRadio('https://stream-node0.rri.co.id/streaming/18\/9018/rrisurabayapro2.mp3');">RRI - Surabaya 2</a></li>
+    </ul>
+    
+    <script>
+        function playRadio(streamURL) {
+            var player = document.getElementById('radioPlayer');
+            player.src = streamURL;
+            player.play();
+        }
+
+        function hls(url) {
+            var radioPlayer = document.getElementById('radioPlayer');
+            var hls = new Hls();
+            hls.loadSource(url);
+            hls.attachMedia(radioPlayer);
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                radioPlayer.play();
+            });
+        }
+    </script>
+</body>
+</html>
